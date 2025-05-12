@@ -1,0 +1,6 @@
+Original tag name: 0.0.2-pre-alpha
+Original tag object: 5608ab1cd485083e81cef5cd4bd5132f03d97077
+Original target commit: 5608ab1cd485083e81cef5cd4bd5132f03d97077
+Original object type: commit
+
+Lightweight tag; the original target commit is recorded above.
