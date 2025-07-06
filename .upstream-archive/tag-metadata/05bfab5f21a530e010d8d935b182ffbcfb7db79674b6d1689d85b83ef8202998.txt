@@ -1,0 +1,6 @@
+Original tag name: test-tag1
+Original tag object: 05f536694ab49cae61f86c844712b9db10bb2468
+Original target commit: 05f536694ab49cae61f86c844712b9db10bb2468
+Original object type: commit
+
+Lightweight tag; the original target commit is recorded above.
