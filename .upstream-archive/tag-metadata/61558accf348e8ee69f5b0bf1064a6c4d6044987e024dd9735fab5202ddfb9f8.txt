@@ -1,0 +1,6 @@
+Original tag name: v0.0.3-rc1
+Original tag object: f33c1ca7c190649fbe7da00e2164a252e325a031
+Original target commit: f33c1ca7c190649fbe7da00e2164a252e325a031
+Original object type: commit
+
+Lightweight tag; the original target commit is recorded above.
