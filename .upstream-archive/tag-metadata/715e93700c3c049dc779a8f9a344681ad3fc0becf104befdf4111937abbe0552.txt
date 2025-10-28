@@ -1,0 +1,19 @@
+Original tag name: v0.0.4-rc1
+Original tag object: 79e48562a8c33bded48c109de844b2e90ca5b9f2
+Original target commit: 15becaa5a327e714f4650ef698b2a4ec25ba40d5
+Original object type: tag
+
+--- Original annotated tag object body ---
+object 15becaa5a327e714f4650ef698b2a4ec25ba40d5
+type commit
+tag v0.0.4-rc1
+tagger lizzie <lizzie@eden-emu.dev> 1761629820 +0000
+
+[Audio] Tighten sink queue back pressure (#2840)
+
+Co-authored-by: Ribbit <ribbit@placeholder.com>
+Co-authored-by: MaranBr <maranbr@outlook.com>
+Reviewed-on: #2840
+Reviewed-by: MaranBr <maranbr@eden-emu.dev>
+Co-authored-by: Ribbit <ribbit@eden-emu.dev>
+Co-committed-by: Ribbit <ribbit@eden-emu.dev>
