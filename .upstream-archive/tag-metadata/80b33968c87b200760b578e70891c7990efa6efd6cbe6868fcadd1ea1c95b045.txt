@@ -1,0 +1,12 @@
+Original tag name: v0.0.4-rc2.test
+Original tag object: 85a560174eb0291f25ccaed1764cbc1a01a5396a
+Original target commit: aa93e0cbb10ed23035c223b72dde3c430c01aec7
+Original object type: tag
+
+--- Original annotated tag object body ---
+object aa93e0cbb10ed23035c223b72dde3c430c01aec7
+type commit
+tag v0.0.4-rc2.test
+tagger lizzie <lizzie@eden-emu.dev> 1761961491 +0000
+
+test build of rc2
