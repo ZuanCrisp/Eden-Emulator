@@ -1,0 +1,12 @@
+Original tag name: v0.0.4-rc2.test2
+Original tag object: 3f356d4e6a0af3958a13754d91de8f9df014d41f
+Original target commit: 612da00d1bf7415cc4c1c8ccfc6ce9216dcce7b4
+Original object type: tag
+
+--- Original annotated tag object body ---
+object 612da00d1bf7415cc4c1c8ccfc6ce9216dcce7b4
+type commit
+tag v0.0.4-rc2.test2
+tagger lizzie <lizzie@eden-emu.dev> 1762305848 +0000
+
+[vk] Clean up Extended Dynamic State code #2947
