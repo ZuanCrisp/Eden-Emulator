@@ -1,0 +1,12 @@
+Original tag name: v0.0.4-rc2
+Original tag object: be78848283c0ad5c501835a7e0ab9afab13a4466
+Original target commit: 08f3639c80f188a3efd7ed1277b0bf8baaa33681
+Original object type: tag
+
+--- Original annotated tag object body ---
+object 08f3639c80f188a3efd7ed1277b0bf8baaa33681
+type commit
+tag v0.0.4-rc2
+tagger lizzie <lizzie@eden-emu.dev> 1762708093 +0000
+
+[cmake, docs] msys: allow bundled FFmpeg, update dep/caveat docs, faster linking on Release mode (#2921)
