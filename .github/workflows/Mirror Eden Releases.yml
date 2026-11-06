@@ -1,0 +1,75 @@
+name: Mirror Eden Releases
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # cek upstream tiap 30 menit
+  workflow_dispatch:          # bisa dijalankan manual
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror-eden
+  cancel-in-progress: false
+
+env:
+  SRC_API: https://git.eden-emu.dev/api/v1/repos/eden-emu/eden
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror releases
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Ambil daftar release dari upstream (terbaru dulu), tanpa draft
+          curl -fsSL "$SRC_API/releases?limit=50&draft=false" -o releases.json
+          count=$(jq length releases.json)
+          echo "Ditemukan $count release di upstream"
+
+          for i in $(seq 0 $((count - 1))); do
+            rel=$(jq -c ".[$i]" releases.json)
+            tag=$(jq -r '.tag_name' <<<"$rel")
+            name=$(jq -r '.name // .tag_name' <<<"$rel")
+            prerelease=$(jq -r '.prerelease' <<<"$rel")
+            jq -r '.body // ""' <<<"$rel" > notes.md
+
+            echo "=== $tag ==="
+
+            # Buat release kalau belum ada
+            if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+              args=(--repo "$GITHUB_REPOSITORY" --title "$name" --notes-file notes.md)
+              [ "$prerelease" = "true" ] && args+=(--prerelease)
+              # release paling baru (index 0) ditandai Latest
+              if [ "$i" -eq 0 ] && [ "$prerelease" != "true" ]; then
+                args+=(--latest)
+              else
+                args+=(--latest=false)
+              fi
+              gh release create "$tag" "${args[@]}"
+            fi
+
+            # Daftar asset yang sudah ada di repo lu
+            existing=$(gh release view "$tag" --repo "$GITHUB_REPOSITORY" \
+              --json assets -q '.assets[].name' || true)
+
+            mkdir -p "dl/$tag"
+            jq -c '.assets[]?' <<<"$rel" | while read -r asset; do
+              aname=$(jq -r '.name' <<<"$asset")
+              aurl=$(jq -r '.browser_download_url' <<<"$asset")
+
+              if grep -Fxq -- "$aname" <<<"$existing"; then
+                echo "skip (sudah ada): $aname"
+                continue
+              fi
+
+              echo "download: $aname"
+              curl -fL --retry 3 -o "dl/$tag/$aname" "$aurl"
+              gh release upload "$tag" "dl/$tag/$aname" \
+                --repo "$GITHUB_REPOSITORY" --clobber
+              rm -f "dl/$tag/$aname"   # hemat disk runner
+            done
+          done
